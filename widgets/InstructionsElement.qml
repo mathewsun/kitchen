@@ -4,7 +4,5 @@ import QtQml 2.15
 import QtQuick.Controls 2.15
 import AppCore 1.0
 
-Item {
-    height: 640
-    width: 420
+InstructionsElementForm {
 }

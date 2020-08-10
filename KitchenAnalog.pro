@@ -1,4 +1,4 @@
-QT += quick
+QT += quick network qml gui
 
 CONFIG += c++11
 
@@ -17,7 +17,8 @@ SOURCES += \
         appcore.cpp \
         main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    Images.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -32,3 +33,16 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     appcore.h
+
+DISTFILES += \
+    android/AndroidManifest.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew \
+    android/gradlew.bat \
+    android/res/values/libs.xml
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+ANDROID_EXTRA_LIBS = $$PWD/OpenSSL/arm/libcrypto_1_1.so $$PWD/OpenSSL/arm/libssl_1_1.so

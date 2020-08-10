@@ -3,5 +3,19 @@
         <file>main.qml</file>
         <file>MainWindow.qml</file>
         <file>MainWindowForm.ui.qml</file>
+        <file>Home.qml</file>
+        <file>HomeForm.ui.qml</file>
+        <file>Instructions.qml</file>
+        <file>Search.qml</file>
+        <file>SearchForm.ui.qml</file>
+        <file>ConsumerBasket.qml</file>
+        <file>ConsumerBasketForm.ui.qml</file>
+        <file>Account.qml</file>
+        <file>AccountForm.ui.qml</file>
+        <file>Loading.qml</file>
+        <file>LoadingForm.ui.qml</file>
+        <file>widgets/InstructionsElement.qml</file>
+        <file>widgets/InstructionsElementForm.ui.qml</file>
+        <file>InstructionsForm.ui.qml</file>
     </qresource>
 </RCC>

@@ -1,29 +1,33 @@
-import QtQuick 2.13
-import QtQuick.Window 2.13
-import QtQml 2.13
-import QtQuick.Controls 2.13
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQml 2.15
+import QtQuick.Controls 2.15
 import AppCore 1.0
 
 Window {
     visible: true
     height: 640
-    width: 480
-    title: qsTr("Кухни мира")
+    width: 420
+    title: qsTr("Кухни мира")    
 
-    Rectangle{
+    /*Rectangle{
         anchors.fill: parent
 
         MainWindow{
             anchors.fill: parent
         }
+    }*/
+
+    Component.onCompleted: {
+        AppCore.startAppCore()
     }
 
 
-    /*Loader
+    Loader
     {
-        id: loader
+        id: loaderMain
         anchors.fill: parent
-        source: "First.qml"
+        source: "Loading.qml"
         //source: "CreateZakaz2.qml"
-    }*/
+    }
 }

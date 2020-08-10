@@ -1,2 +1,19 @@
-<!DOCTYPE RCC>
-<RCC version="1.0"/>
+<RCC>
+    <qresource prefix="/">
+        <file>Images/heartBad.png</file>
+        <file>Images/heartGood.png</file>
+        <file>Images/Account0.png</file>
+        <file>Images/Account1.png</file>
+        <file>Images/ConsumerBasket0.png</file>
+        <file>Images/ConsumerBasket1.png</file>
+        <file>Images/Home0.png</file>
+        <file>Images/Home1.png</file>
+        <file>Images/Instructions0.png</file>
+        <file>Images/Instructions1.png</file>
+        <file>Images/Search0.png</file>
+        <file>Images/Search1.png</file>
+        <file>Images/icon.png</file>
+        <file>Images/icon2.png</file>
+        <file>Images/play.png</file>
+    </qresource>
+</RCC>
