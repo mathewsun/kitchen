@@ -11,7 +11,9 @@ HomeForm {
             mymodelSwipeView.append({name: AppCore.getVectorTopReceptsName()[i] ,
                                         likesNumber: AppCore.getVectorTopReceptsCountLikes()[i] ,
                                         timeText: AppCore.getVectorTopReceptsTimeMinutesToCook()[i] + " min",
-                                        userName: "User Name" + i,
+                                        userName: AppCore.getVectorTopUserName()[i] ,
+                                        userId: AppCore.getVectorTopUserId()[i],
+                                        userImage: AppCore.getVectorTopUserAvatarImgUrl()[i],
                                         imageUrl: AppCore.getVectorTopReceptsImageUrl()[i]})
         }
     }

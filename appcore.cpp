@@ -2,11 +2,32 @@
 
 AppCore::AppCore()
 {
-    urlServer = "https://www.rentoolo.ru/api/Kitchen/";
+    urlServer = "https://www.rentoolo.ru/api/";
     connect(&myApiQuery, &QNetworkAccessManager::finished, this, &AppCore::onReply);
 
     qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
     getTopRecipes();
+    getOneRecipe(2);
+}
+
+QVector<QString> AppCore::getVectorTopUserAvatarImgUrl() const
+{
+    return vectorTopUserAvatarImgUrl;
+}
+
+QVector<QString> AppCore::getVectorTopUserName() const
+{
+    return vectorTopUserName;
+}
+
+QVector<int> AppCore::getVectorTopUserId() const
+{
+    return vectorTopUserId;
+}
+
+void AppCore::setVectorTopUserId(const QVector<int> &value)
+{
+    vectorTopUserId = value;
 }
 
 QVector<int> AppCore::getVectorTopReceptsCountLikes() const
@@ -50,6 +71,10 @@ void AppCore::onReply(QNetworkReply *reply)
         onReplyTopRecipes(reply);
     }
 
+    else if(myUrl.indexOf("rentoolo.ru/api/recipe/") > -1){
+        onReplyOneRecipe(reply);
+    }
+
     //qDebug() << doc;
     reply->deleteLater();
 }
@@ -78,18 +103,52 @@ void AppCore::onReplyTopRecipes(QNetworkReply *reply)
     vectorTopReceptsImageUrl.clear();
     vectorTopReceptsTimeMinutesToCook.clear();
     vectorTopReceptsCountLikes.clear();
+    vectorTopUserId.clear();
+    vectorTopUserName.clear();
+    vectorTopUserAvatarImgUrl.clear();
     for(int i = 0; i < jArr.size(); i++){
         vectorTopReceptsName.append(jArr[i].toObject()["Name"].toString());
         vectorTopReceptsImageUrl.append( jArr[i].toObject()["ImgUrl"].toString());
         vectorTopReceptsTimeMinutesToCook.append(jArr[i].toObject()["TimeMinutesToCook"].toInt());
         vectorTopReceptsCountLikes.append(jArr[i].toObject()["CountLikes"].toInt());
+        vectorTopUserId.append(jArr[i].toObject()["UserId"].toInt());
+        vectorTopUserName.append(jArr[i].toObject()["UserName"].toString());
+        vectorTopUserAvatarImgUrl.append(jArr[i].toObject()["UserAvatarImgUrl"].toString());
         //qDebug()<<vectorTopReceptsName;
     }
     signalLoadTopRecept();
 }
 
+void AppCore::onReplyOneRecipe(QNetworkReply *reply)
+{
+    QByteArray replyArray;
+    while (!reply->atEnd()) {
+        replyArray.append(reply->readLine());
+    }
+    QJsonDocument doc = QJsonDocument::fromJson(replyArray);
+    QJsonObject jObj = doc.object();
+
+    int id = jObj["Id"].toInt();
+    int userId = jObj["UserId"].toInt();
+    QString name = jObj["Name"].toString();
+    QString discription = jObj["Discription"].toString();
+    QDateTime created = QDateTime::fromString(jObj["Created"].toString() , "yyyy-MM-ddThh:mm:ss.zzz");
+    QString imgUrl = jObj["ImgUrl"].toString();
+    int countLikes = jObj["CountLikes"].toInt();
+    int timeMinutesToCook = jObj["TimeMinutesToCook"].toInt();
+
+    qDebug()<<id<<userId<<name<<discription;
+    qDebug()<<created<<imgUrl<<countLikes<<timeMinutesToCook;
+
+}
+
 void AppCore::getTopRecipes()
 {
-    getHttpRequest("GetTopRecipes");
+    getHttpRequest("Kitchen/GetTopRecipes");
+}
+
+void AppCore::getOneRecipe(int id)
+{
+    getHttpRequest("recipe/" + QString::number(id));
 }
 

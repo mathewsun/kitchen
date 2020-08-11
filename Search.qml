@@ -5,4 +5,12 @@ import QtQuick.Controls 2.15
 import AppCore 1.0
 
 SearchForm {
+    buttonFilterRight.onClicked: {
+}
+    buttonFilterLeft.onClicked: {
+    }
+
+    Component.onCompleted: {
+
+    }
 }

@@ -15,5 +15,14 @@
         <file>Images/icon.png</file>
         <file>Images/icon2.png</file>
         <file>Images/play.png</file>
+        <file>Images/SearchPage/asianCooking.png</file>
+        <file>Images/SearchPage/caucasianCuisine.png</file>
+        <file>Images/SearchPage/dessert.png</file>
+        <file>Images/SearchPage/europeanFood.png</file>
+        <file>Images/SearchPage/fishFood.png</file>
+        <file>Images/SearchPage/meatDish.png</file>
+        <file>Images/SearchPage/salads.png</file>
+        <file>Images/SearchPage/soups.png</file>
+        <file>Images/SearchPage/vegetarianism.png</file>
     </qresource>
 </RCC>

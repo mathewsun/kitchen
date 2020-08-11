@@ -11,6 +11,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonValue>
+#include "QDateTime"
 
 
 class AppCore: public QObject
@@ -26,6 +27,13 @@ public:
     Q_INVOKABLE QVector<QString> vectorTopReceptsImageUrl;
     Q_INVOKABLE QVector<int> vectorTopReceptsTimeMinutesToCook;
     Q_INVOKABLE QVector<int> vectorTopReceptsCountLikes;
+    Q_INVOKABLE QVector <int> vectorTopUserId;
+    Q_INVOKABLE QVector <QString> vectorTopUserName;
+    Q_INVOKABLE QVector <QString> vectorTopUserAvatarImgUrl;
+
+
+
+
 
 signals:
     void signalLoadTopRecept();
@@ -33,17 +41,24 @@ signals:
 
 public slots:
     Q_INVOKABLE void startAppCore();
+    //server
     Q_INVOKABLE void getTopRecipes();
+    Q_INVOKABLE void getOneRecipe(int id);
     //TopRecepts
     Q_INVOKABLE QVector<QString> getVectorTopReceptsName() const;
     Q_INVOKABLE QVector<QString> getVectorTopReceptsImageUrl() const;
     Q_INVOKABLE QVector<int> getVectorTopReceptsTimeMinutesToCook() const;
     Q_INVOKABLE QVector<int> getVectorTopReceptsCountLikes() const;
+    Q_INVOKABLE QVector<int> getVectorTopUserId() const;
+    Q_INVOKABLE void setVectorTopUserId(const QVector<int> &value);
+    Q_INVOKABLE QVector<QString> getVectorTopUserName() const;
+    Q_INVOKABLE QVector<QString> getVectorTopUserAvatarImgUrl() const;
 
 private slots:
     void onReply(QNetworkReply* reply);
     void getHttpRequest(QString urlRequest);
     void onReplyTopRecipes(QNetworkReply* reply);
+    void onReplyOneRecipe(QNetworkReply* reply); //сделать возврат в класс и придумать что с этим делать
 
 private:
     QString urlServer;

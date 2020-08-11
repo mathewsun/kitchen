@@ -144,7 +144,7 @@ Item {
                     anchors.top: labelName.bottom
                     anchors.topMargin: parent.width * 0.04
                     anchors.left: rectangleWithImage.left
-                    source: "Images/heartGood.png"
+                    source: model.userImage
                     fillMode: Image.Stretch
                 }
 
