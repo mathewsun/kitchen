@@ -17,5 +17,7 @@
         <file>widgets/InstructionsElement.qml</file>
         <file>widgets/InstructionsElementForm.ui.qml</file>
         <file>InstructionsForm.ui.qml</file>
+        <file>secondPages/AllRecepts.qml</file>
+        <file>secondPages/AllReceptsForm.ui.qml</file>
     </qresource>
 </RCC>

@@ -48,6 +48,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         height: comboBoxCalories.y + comboBoxCalories.height
+        z:1
         //color: "red"
 
         TextField {

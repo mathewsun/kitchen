@@ -31,9 +31,23 @@ public:
     Q_INVOKABLE QVector <QString> vectorTopUserName;
     Q_INVOKABLE QVector <QString> vectorTopUserAvatarImgUrl;
 
+    //что то нужно будет переделать, внимательно проверить
+    //Instructions
+    Q_INVOKABLE QVector<QString> vectorInstructionsName;
+    Q_INVOKABLE QVector<QString> vectorInstructionsImageUrl;
+    Q_INVOKABLE QVector<int> vectorInstructionsTimeMinutesToCook;
+    Q_INVOKABLE QVector<int> vectorInstructionsCountLikes;
+    Q_INVOKABLE QVector <int> vectorInstructionsUserId;
+    Q_INVOKABLE QVector <QString> vectorInstructionsUserName;
+    Q_INVOKABLE QVector <QString> vectorInstructionsUserAvatarImgUrl;
 
-
-
+    QVector<QString> getVectorInstructionsName() const;
+    QVector<QString> getVectorInstructionsImageUrl() const;
+    QVector<int> getVectorInstructionsTimeMinutesToCook() const;
+    QVector<int> getVectorInstructionsCountLikes() const;
+    QVector<int> getVectorInstructionsUserId() const;
+    QVector<QString> getVectorInstructionsUserName() const;
+    QVector<QString> getVectorInstructionsUserAvatarImgUrl() const;
 
 signals:
     void signalLoadTopRecept();
@@ -44,6 +58,7 @@ public slots:
     //server
     Q_INVOKABLE void getTopRecipes();
     Q_INVOKABLE void getOneRecipe(int id);
+    Q_INVOKABLE void getInstructions();
     //TopRecepts
     Q_INVOKABLE QVector<QString> getVectorTopReceptsName() const;
     Q_INVOKABLE QVector<QString> getVectorTopReceptsImageUrl() const;
@@ -54,11 +69,14 @@ public slots:
     Q_INVOKABLE QVector<QString> getVectorTopUserName() const;
     Q_INVOKABLE QVector<QString> getVectorTopUserAvatarImgUrl() const;
 
+
+
 private slots:
     void onReply(QNetworkReply* reply);
     void getHttpRequest(QString urlRequest);
     void onReplyTopRecipes(QNetworkReply* reply);
     void onReplyOneRecipe(QNetworkReply* reply); //сделать возврат в класс и придумать что с этим делать
+    void onReplyInstructions(QNetworkReply* reply);
 
 private:
     QString urlServer;

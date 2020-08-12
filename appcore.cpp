@@ -10,6 +10,41 @@ AppCore::AppCore()
     getOneRecipe(2);
 }
 
+QVector<QString> AppCore::getVectorInstructionsUserAvatarImgUrl() const
+{
+    return vectorInstructionsUserAvatarImgUrl;
+}
+
+QVector<QString> AppCore::getVectorInstructionsUserName() const
+{
+    return vectorInstructionsUserName;
+}
+
+QVector<int> AppCore::getVectorInstructionsUserId() const
+{
+    return vectorInstructionsUserId;
+}
+
+QVector<int> AppCore::getVectorInstructionsCountLikes() const
+{
+    return vectorInstructionsCountLikes;
+}
+
+QVector<int> AppCore::getVectorInstructionsTimeMinutesToCook() const
+{
+    return vectorInstructionsTimeMinutesToCook;
+}
+
+QVector<QString> AppCore::getVectorInstructionsImageUrl() const
+{
+    return vectorInstructionsImageUrl;
+}
+
+QVector<QString> AppCore::getVectorInstructionsName() const
+{
+    return vectorInstructionsName;
+}
+
 QVector<QString> AppCore::getVectorTopUserAvatarImgUrl() const
 {
     return vectorTopUserAvatarImgUrl;
@@ -73,6 +108,10 @@ void AppCore::onReply(QNetworkReply *reply)
 
     else if(myUrl.indexOf("rentoolo.ru/api/recipe/") > -1){
         onReplyOneRecipe(reply);
+    }
+
+    else if(myUrl.indexOf("kitchen/Instructions") > -1){
+        onReplyInstructions(reply);
     }
 
     //qDebug() << doc;
@@ -142,6 +181,36 @@ void AppCore::onReplyOneRecipe(QNetworkReply *reply)
 
 }
 
+void AppCore::onReplyInstructions(QNetworkReply *reply)
+{
+    QByteArray replyArray;
+    while (!reply->atEnd()) {
+        replyArray.append(reply->readLine());
+    }
+    QJsonDocument doc = QJsonDocument::fromJson(replyArray);
+    //qDebug() << replyArray;
+    //qDebug() << doc;
+    QJsonArray jArr = doc.array();
+
+    vectorInstructionsName.clear();
+    vectorInstructionsImageUrl.clear();
+    vectorInstructionsTimeMinutesToCook.clear();
+    vectorInstructionsCountLikes.clear();
+    vectorInstructionsUserId.clear();
+    vectorInstructionsUserName.clear();
+    vectorInstructionsUserAvatarImgUrl.clear();
+
+    for(int i = 0; i < jArr.size(); i++){
+        /*vectorInstructionsName.append();
+        vectorInstructionsImageUrl.append();
+        vectorInstructionsTimeMinutesToCook.append();
+        vectorInstructionsCountLikes.append();
+        vectorInstructionsUserId.append();
+        vectorInstructionsUserName.append();
+        vectorInstructionsUserAvatarImgUrl.append();*/
+    }
+}
+
 void AppCore::getTopRecipes()
 {
     getHttpRequest("Kitchen/GetTopRecipes");
@@ -150,5 +219,10 @@ void AppCore::getTopRecipes()
 void AppCore::getOneRecipe(int id)
 {
     getHttpRequest("recipe/" + QString::number(id));
+}
+
+void AppCore::getInstructions()
+{
+    getHttpRequest("kitchen/Instructions");
 }
 
