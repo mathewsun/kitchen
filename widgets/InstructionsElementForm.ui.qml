@@ -9,6 +9,11 @@ Item {
     height: 250
     width: 180
 
+    property alias imageFood: imageFood
+    property alias mouseAreaPlay: mouseAreaPlay
+    property alias labelName: labelName
+    property alias labelTimeLikes: labelTimeLikes
+
     Rectangle{
         id: mainRectangle
         anchors.fill: parent

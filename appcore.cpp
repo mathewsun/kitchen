@@ -2,42 +2,28 @@
 
 AppCore::AppCore()
 {
-    urlServer = "https://www.rentoolo.ru/api/";
+    urlServer = "https://www.rentoolo.ru/api/kitchen/";
     connect(&myApiQuery, &QNetworkAccessManager::finished, this, &AppCore::onReply);
 
     qDebug() << QSslSocket::supportsSsl() << QSslSocket::sslLibraryBuildVersionString() << QSslSocket::sslLibraryVersionString();
     getTopRecipes();
-    getOneRecipe(2);
+    getInstructions();
+    //getOneRecipe(2);
 }
 
-QVector<QString> AppCore::getVectorInstructionsUserAvatarImgUrl() const
+QVector<int> AppCore::getVectorInstructionsCategory() const
 {
-    return vectorInstructionsUserAvatarImgUrl;
+    return vectorInstructionsCategory;
 }
 
-QVector<QString> AppCore::getVectorInstructionsUserName() const
+QVector<QString> AppCore::getVectorInstructionsYouTubeUrl() const
 {
-    return vectorInstructionsUserName;
+    return vectorInstructionsYouTubeUrl;
 }
 
-QVector<int> AppCore::getVectorInstructionsUserId() const
+QVector<int> AppCore::getVectorInstructionsId() const
 {
-    return vectorInstructionsUserId;
-}
-
-QVector<int> AppCore::getVectorInstructionsCountLikes() const
-{
-    return vectorInstructionsCountLikes;
-}
-
-QVector<int> AppCore::getVectorInstructionsTimeMinutesToCook() const
-{
-    return vectorInstructionsTimeMinutesToCook;
-}
-
-QVector<QString> AppCore::getVectorInstructionsImageUrl() const
-{
-    return vectorInstructionsImageUrl;
+    return vectorInstructionsId;
 }
 
 QVector<QString> AppCore::getVectorInstructionsName() const
@@ -101,7 +87,7 @@ void AppCore::onReply(QNetworkReply *reply)
     //QJsonDocument doc = QJsonDocument::fromJson(replyArray);
 
     QString myUrl = reply->url().toString();
-    if(myUrl.endsWith("/GetTopRecipes")){
+    if(myUrl.endsWith("/TopRecipes")){
         //qDebug()<<"yyyy";
         onReplyTopRecipes(reply);
     }
@@ -110,7 +96,7 @@ void AppCore::onReply(QNetworkReply *reply)
         onReplyOneRecipe(reply);
     }
 
-    else if(myUrl.indexOf("kitchen/Instructions") > -1){
+    else if(myUrl.endsWith("Instructions")){
         onReplyInstructions(reply);
     }
 
@@ -192,28 +178,22 @@ void AppCore::onReplyInstructions(QNetworkReply *reply)
     //qDebug() << doc;
     QJsonArray jArr = doc.array();
 
+    vectorInstructionsId.clear();
     vectorInstructionsName.clear();
-    vectorInstructionsImageUrl.clear();
-    vectorInstructionsTimeMinutesToCook.clear();
-    vectorInstructionsCountLikes.clear();
-    vectorInstructionsUserId.clear();
-    vectorInstructionsUserName.clear();
-    vectorInstructionsUserAvatarImgUrl.clear();
+    vectorInstructionsYouTubeUrl.clear();
+    vectorInstructionsCategory.clear();
 
     for(int i = 0; i < jArr.size(); i++){
-        /*vectorInstructionsName.append();
-        vectorInstructionsImageUrl.append();
-        vectorInstructionsTimeMinutesToCook.append();
-        vectorInstructionsCountLikes.append();
-        vectorInstructionsUserId.append();
-        vectorInstructionsUserName.append();
-        vectorInstructionsUserAvatarImgUrl.append();*/
+        vectorInstructionsId.append(jArr[i].toObject()["Id"].toInt());
+        vectorInstructionsName.append(jArr[i].toObject()["Name"].toString());
+        vectorInstructionsYouTubeUrl.append(jArr[i].toObject()["YouTubeUrl"].toString());
+        vectorInstructionsCategory.append(jArr[i].toObject()["Category"].toInt());
     }
 }
 
 void AppCore::getTopRecipes()
 {
-    getHttpRequest("Kitchen/GetTopRecipes");
+    getHttpRequest("TopRecipes");
 }
 
 void AppCore::getOneRecipe(int id)
@@ -223,6 +203,6 @@ void AppCore::getOneRecipe(int id)
 
 void AppCore::getInstructions()
 {
-    getHttpRequest("kitchen/Instructions");
+    getHttpRequest("Instructions");
 }
 

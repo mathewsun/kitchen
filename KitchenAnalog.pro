@@ -34,6 +34,10 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     appcore.h
 
+
+
+ANDROID_EXTRA_LIBS = $$PWD/OpenSSL/arm/libcrypto_1_1.so $$PWD/OpenSSL/arm/libssl_1_1.so
+
 DISTFILES += \
     android/AndroidManifest.xml \
     android/build.gradle \
@@ -44,5 +48,3 @@ DISTFILES += \
     android/res/values/libs.xml
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
-
-ANDROID_EXTRA_LIBS = $$PWD/OpenSSL/arm/libcrypto_1_1.so $$PWD/OpenSSL/arm/libssl_1_1.so

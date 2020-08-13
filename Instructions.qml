@@ -42,10 +42,19 @@ InstructionsForm {
         comboBoxCalories.currentIndex = 0
         comboBoxDayTime.currentIndex = 0
 
-        for(var i = 0; i < 10; i++){
+        /*for(var i = 0; i < 10; i++){
             modelGridWiew.append({name: "asdfasf" ,
                                      imageUrl: "dsagads"})
-        }
+        }*/
+        for(var i = 0; i < AppCore.getVectorInstructionsId().length; i++){
+                    modelGridWiew.append({instructionId: AppCore.getVectorInstructionsId()[i] ,
+                                             instructionIndex: i ,
+                                             instructionName: AppCore.getVectorInstructionsName()[i] ,
+                                             youTubeUrl:AppCore.getVectorInstructionsYouTubeUrl()[i] ,
+                                             category: AppCore.getVectorInstructionsCategory()[i] ,
+                                             imageUrl: "dsagads"})
+                }
+
     }
 
 }

@@ -151,6 +151,8 @@ Item {
                 height: gridView.cellHeight * 0.9
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
+                labelName.text: model.instructionName
+                labelTimeLikes.text: "123"
                 }
 
         }
